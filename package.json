@@ -1,0 +1,14 @@
+{
+  "name": "react-boilerplate",
+  "private": true,
+  "dependencies": {
+    "express": "^4.12.2",
+    "morgan": "^1.5.1",
+    "node-jsx": "^0.12.4",
+    "react": "^0.12.2",
+    "react-document-title": "^1.0.2",
+    "react-router": "^0.12.4"
+  },
+  "scripts": {
+  }
+}
