@@ -6,12 +6,16 @@ var React         = require('react')
 
   , errorHandler =
 
-(err, req, res, next) => {
+function * (next) {
+  try {
+    yield next;
+  } catch (err) {
     var markup = React.renderToStaticMarkup(<InternalServerError err={err}/>)
       , html   = React.renderToStaticMarkup(<Html title={DocumentTitle.rewind()} markup={markup}/>);
-  res.status(500);
 
-  res.send('<!doctype html>' + html);
+    this.status = 500;
+    this.body   = '<!doctype html>' + html;
+  }
 };
 
 module.exports = errorHandler;

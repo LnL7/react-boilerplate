@@ -11,9 +11,8 @@ var React         = require('react')
   , InternalServerError =
 
 React.createClass({
-  propTypes : {
-    err : PropTypes.string.isRequired
-  }
+  propTypes :
+    { err: PropTypes.string.isRequired }
 
 , render : function () {
     var {err} = this.props;

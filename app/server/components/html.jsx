@@ -11,10 +11,10 @@ var React = require('react')
   , Html =
 
 React.createClass({
-  propTypes : {
-    title   : PropTypes.string.isRequired
-  , markup  : PropTypes.string.isRequired
-  }
+  propTypes :
+    { title  : PropTypes.string.isRequired
+    , markup : PropTypes.string.isRequired
+    }
 
 , render : function () {
     var {title, markup} = this.props;
@@ -31,7 +31,7 @@ React.createClass({
           <link rel="stylesheet" href={stylesheet}/>
           <script type="text/javascript" src={javascript}></script>
         </head>
-        <body dangerouslySetInnerHTML={{__html: markup}}></body>
+        <body dangerouslySetInnerHTML={{ __html: markup }}></body>
       </html>
     );
   }

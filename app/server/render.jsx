@@ -7,15 +7,13 @@ var React         = require('react')
   , render =
 
 (routes) =>
-  (req, res, next) => {
-    Router.run(routes, req.url, (Handler, state) => {
+  function * () {
+    Router.run(routes, this.url, (Handler, state) => {
       var markup = React.renderToString(<Handler/>)
         , html   = React.renderToStaticMarkup(<Html title={DocumentTitle.rewind()} markup={markup}/>);
 
-      if (state.routes.some(r => r.isNotFound)) {
-        res.status(404);
-      }
-      res.send('<!doctype html>' + html);
+      if (state.routes.some(r => r.isNotFound)) this.status = 404
+      this.body = '<!doctype html>' + html;
     });
   };
 

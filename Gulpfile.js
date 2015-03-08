@@ -11,7 +11,10 @@ var gulp    = require('gulp')
   , source      = require('vinyl-source-stream')
 
   , del  = require('del')
-  , path = require('path');
+  , path = require('path')
+
+  , heimlich = require('heimlich')
+  ;
 
 
 gulp.task('clean', function (next) {
@@ -22,7 +25,8 @@ gulp.task('clean', function (next) {
 
 gulp.task('watch', ['clean', 'browser', 'jsx'], function () {
   var jsx      = path.join(__dirname, 'app/**/*.jsx')
-    , metadata = path.join(__dirname, 'app/**/metadata/*.txt');
+    , metadata = path.join(__dirname, 'app/**/metadata/*.txt')
+    ;
 
   gulp.watch([jsx, metadata], ['jsx']);
 });
@@ -30,21 +34,23 @@ gulp.task('watch', ['clean', 'browser', 'jsx'], function () {
 gulp.task('browser', ['node'], function () {
   var root = path.join(__dirname, 'public/**/*');
 
-  browserSync({
-    files : root
-  , port  : 7000
-  , proxy : '127.0.0.1:3000'
-  });
+  browserSync(
+    { files : root
+    , port  : 7000
+    , proxy : '127.0.0.1:3000'
+    });
 });
 
 gulp.task('node', function () {
   var entry = 'index.js'
-    , app   = path.join(__dirname, 'app/server/**/*');
+    , app   = path.join(__dirname, 'app/server/**/*')
+    ;
 
-  nodemon({
-    script : entry
-  , watch  : [entry, app]
-  });
+  nodemon(
+    { script   : entry
+    , nodeArgs : ['--harmony']
+    , watch    : [entry, app]
+    });
 });
 
 gulp.task("jsx", function () {
@@ -53,21 +59,14 @@ gulp.task("jsx", function () {
     , scripts = path.join(__dirname, 'public/assets/javascripts')
 
     , stringifyText = stringify(['.txt'])
-    , reactifyES6   = function (f) {
-        return reactify(f, {es6: true});
-      };
+    ;
 
-  watchify(browserify({
-    cache        : {}
-  , packageCache : {}
-  , debug        : true
-  , entries      : [entry]
-  }))
+  heimlich.react
+    .browserify(entry)
     .transform(stringifyText)
-    .transform(reactifyES6)
     .bundle()
     .pipe(source(bundle))
-    .pipe(gulp.dest(scripts));
+    .pipe(heimlich.dest(__dirname, 'public/assets/javascripts'));
 });
 
 gulp.task('default', ['watch']);

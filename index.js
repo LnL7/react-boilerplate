@@ -1,22 +1,28 @@
-require('node-jsx').install({extension: '.jsx', harmony: true});
+require('node-jsx').install({ extension: '.jsx', harmony: true });
 require('node-txt').install();
 
-var express    = require('express')
-  , log        = require('morgan')
-  , path       = require('path')
+var koa    = require('koa')
+  , logger = require('koa-logger')
+  , serve  = require('koa-static')
+
+  , path  = require('path')
 
   , errorHandler = require(path.join(__dirname, 'app/server/error-handler.jsx'))
   , render       = require(path.join(__dirname, 'app/server/render.jsx'))
   , routes       = require(path.join(__dirname, 'app/router/routes.jsx'))
-  , app          = express();
+
+  , app  = koa()
+  ;
 
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(log('dev'));
+app
+  .use(logger())
+  .use(serve('public'))
+  .use(errorHandler)
+  .use(render(routes));
 
-app.use(render(routes));
-app.use(errorHandler);
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log('Express server listening on port ' + this.address().port);
-});
+var port = process.env.PORT || 3000;
+
+app.listen(port);
+console.log('listening on ' + port);
