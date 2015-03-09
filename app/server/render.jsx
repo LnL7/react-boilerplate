@@ -2,7 +2,7 @@ var React         = require('react')
   , Router        = require('react-router')
   , DocumentTitle = require('react-document-title')
 
-  , Html = require('./components/html.jsx')
+  , Html = require('./components/html')
 
   , render =
 

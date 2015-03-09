@@ -1,20 +1,16 @@
 var React = require('react')
 
-  , description = require('../metadata/description.txt')
-  , keywords    = require('../metadata/keywords.txt')
-  , stylesheet  = require('../metadata/stylesheet-url.txt')
-  , javascript  = require('../metadata/javascript-url.txt')
-
-  , {PropTypes} = React
+  , {PropTypes}                     = React
+  , {assets, description, keywords} = require('../metadata.json')
 
 
   , Html =
 
 React.createClass({
-  propTypes :
-    { title  : PropTypes.string.isRequired
-    , markup : PropTypes.string.isRequired
-    }
+  propTypes : {
+    title  : PropTypes.string.isRequired
+  , markup : PropTypes.string.isRequired
+  }
 
 , render : function () {
     var {title, markup} = this.props;
@@ -28,8 +24,8 @@ React.createClass({
           <meta name="description" content={description}/>
           <meta name="keywords" content={keywords}/>
           <title>{title}</title>
-          <link rel="stylesheet" href={stylesheet}/>
-          <script type="text/javascript" src={javascript}></script>
+          <link rel="stylesheet" href={assets.css}/>
+          <script type="text/javascript" src={assets.js}></script>
         </head>
         <body dangerouslySetInnerHTML={{ __html: markup }}></body>
       </html>

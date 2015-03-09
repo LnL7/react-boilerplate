@@ -1,9 +1,9 @@
 var React  = require('react')
   , Router = require('react-router')
 
-  , App      = require('./components/app.jsx')
-  , Default  = require('./components/default.jsx')
-  , NotFound = require('./components/not-found.jsx')
+  , App      = require('./components/app')
+  , Default  = require('./components/default')
+  , NotFound = require('./components/not-found')
 
   , {Route, DefaultRoute, NotFoundRoute} = Router
 

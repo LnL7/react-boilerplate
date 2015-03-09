@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "css": "/assets/stylesheets/main.css",
+    "js": "/assets/javascripts/main.js"
+  },
+  "description": "React, A javascript library for building user interfaces.",
+  "keywords": "react,javascript",
+  "status": {
+    "500": "500 Internal Server Error"
+  }
+}

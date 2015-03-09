@@ -2,10 +2,10 @@
   "name": "react-boilerplate",
   "private": true,
   "dependencies": {
+    "babel": "^4.7.3",
     "koa": "^0.18.1",
     "koa-logger": "^1.2.2",
     "koa-static": "^1.4.9",
-    "node-jsx": "^0.12.4",
     "react": "^0.12.2",
     "react-document-title": "^1.0.2",
     "react-router": "^0.12.4"
@@ -20,7 +20,6 @@
     "gulp-nodemon": "^1.0.5",
     "heimlich": "git://github.com/romeovs/heimlich",
     "reactify": "^1.0.0",
-    "stringify": "^3.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^2.4.0"

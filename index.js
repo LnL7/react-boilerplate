@@ -1,5 +1,4 @@
-require('node-jsx').install({ extension: '.jsx', harmony: true });
-require('node-txt').install();
+require('babel/register');
 
 var koa    = require('koa')
   , logger = require('koa-logger')
@@ -7,9 +6,9 @@ var koa    = require('koa')
 
   , path  = require('path')
 
-  , errorHandler = require(path.join(__dirname, 'app/server/error-handler.jsx'))
-  , render       = require(path.join(__dirname, 'app/server/render.jsx'))
-  , routes       = require(path.join(__dirname, 'app/router/routes.jsx'))
+  , errorHandler = require('app/server/error-handler')
+  , render       = require('app/server/render')
+  , routes       = require('app/router/routes')
 
   , app  = koa()
   ;

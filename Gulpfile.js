@@ -24,21 +24,22 @@ gulp.task('clean', function (next) {
 });
 
 gulp.task('watch', ['clean', 'browser', 'jsx'], function () {
-  var jsx      = path.join(__dirname, 'app/**/*.jsx')
-    , metadata = path.join(__dirname, 'app/**/metadata/*.txt')
+  var jsx  = path.join(__dirname, 'app/**/*.jsx')
+    , json = path.join(__dirname, 'app/**/*.json')
     ;
 
-  gulp.watch([jsx, metadata], ['jsx']);
+  gulp.watch([jsx, json], ['jsx']);
 });
 
 gulp.task('browser', ['node'], function () {
   var root = path.join(__dirname, 'public/**/*');
 
-  browserSync(
-    { files : root
-    , port  : 7000
-    , proxy : '127.0.0.1:3000'
-    });
+  browserSync({
+    files : root
+  , port  : 7000
+  , proxy : '127.0.0.1:3000'
+  , open  : false
+  });
 });
 
 gulp.task('node', function () {
@@ -46,27 +47,22 @@ gulp.task('node', function () {
     , app   = path.join(__dirname, 'app/server/**/*')
     ;
 
-  nodemon(
-    { script   : entry
-    , nodeArgs : ['--harmony']
-    , watch    : [entry, app]
-    });
+  nodemon({
+    script   : entry
+  , nodeArgs : ['--harmony']
+  , watch    : [entry, app]
+  });
 });
 
 gulp.task("jsx", function () {
-  var entry   = './app/client/entry.jsx'
-    , bundle  = 'application.js'
-    , scripts = path.join(__dirname, 'public/assets/javascripts')
-
-    , stringifyText = stringify(['.txt'])
+  var entry   = './client.js'
+    , scripts = 'public/assets/javascripts'
     ;
 
-  heimlich.react
-    .browserify(entry)
-    .transform(stringifyText)
-    .bundle()
-    .pipe(source(bundle))
-    .pipe(heimlich.dest(__dirname, 'public/assets/javascripts'));
+  heimlich.reactify([entry], { watching: true })
+    .done(function (bundler) {
+      bundler.pipe(heimlich.dest(__dirname, scripts));
+    });
 });
 
 gulp.task('default', ['watch']);

@@ -2,7 +2,7 @@ var React         = require('react')
   , Router        = require('react-router')
   , DocumentTitle = require('react-document-title')
 
-  , title = require('../metadata/title.txt')
+  , {title} = require('../metadata.json')
 
   , {RouteHandler, Link} = Router
 

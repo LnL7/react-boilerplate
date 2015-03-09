@@ -1,11 +1,8 @@
 var React         = require('react')
   , DocumentTitle = require('react-document-title')
 
-  , description = require('../metadata/description.txt')
-  , keywords    = require('../metadata/keywords.txt')
-  , title       = require('../metadata/500.txt')
-
-  , {PropTypes} = React
+  , {PropTypes}                     = React
+  , {description, keywords, status} = require('../metadata.json')
 
 
   , InternalServerError =
@@ -18,9 +15,9 @@ React.createClass({
     var {err} = this.props;
 
     return (
-      <DocumentTitle title={title}>
+      <DocumentTitle title={status['500']}>
         <section>
-          <h1>{title}</h1>
+          <h1>{status['500']}</h1>
           <pre>{err.stack}</pre>
         </section>
       </DocumentTitle>

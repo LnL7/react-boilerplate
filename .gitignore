@@ -1,2 +1,4 @@
-node_modules
-public/assets
+dist/
+node_modules/
+
+public/assets/

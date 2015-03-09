@@ -1,8 +1,8 @@
 var React         = require('react')
   , DocumentTitle = require('react-document-title')
 
-  , Html                = require('./components/html.jsx')
-  , InternalServerError = require('./components/internal-server-error.jsx')
+  , Html                = require('./components/html')
+  , InternalServerError = require('./components/internal-server-error')
 
   , errorHandler =
 
