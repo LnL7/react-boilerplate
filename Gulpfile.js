@@ -24,11 +24,6 @@ gulp.task('clean', function (next) {
 });
 
 gulp.task('watch', ['clean', 'browser', 'jsx'], function () {
-  var jsx  = path.join(__dirname, 'app/**/*.jsx')
-    , json = path.join(__dirname, 'app/**/*.json')
-    ;
-
-  gulp.watch([jsx, json], ['jsx']);
 });
 
 gulp.task('browser', ['node'], function () {

@@ -13,8 +13,6 @@ React.createClass({
   }
 
 , render : function () {
-    var {title, markup} = this.props;
-
     return (
       <html className="no-js" lang="en">
         <head>
@@ -23,11 +21,11 @@ React.createClass({
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta name="description" content={description}/>
           <meta name="keywords" content={keywords}/>
-          <title>{title}</title>
+          <title>{this.props.title}</title>
           <link rel="stylesheet" href={assets.css}/>
           <script type="text/javascript" src={assets.js}></script>
         </head>
-        <body dangerouslySetInnerHTML={{ __html: markup }}></body>
+        <body dangerouslySetInnerHTML={{ __html: this.props.markup }}></body>
       </html>
     );
   }

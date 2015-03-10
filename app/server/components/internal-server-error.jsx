@@ -12,13 +12,11 @@ React.createClass({
     { err: PropTypes.string.isRequired }
 
 , render : function () {
-    var {err} = this.props;
-
     return (
       <DocumentTitle title={status['500']}>
         <section>
           <h1>{status['500']}</h1>
-          <pre>{err.stack}</pre>
+          <pre>{this.props.err.stack}</pre>
         </section>
       </DocumentTitle>
     );

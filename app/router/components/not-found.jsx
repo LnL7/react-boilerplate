@@ -9,9 +9,11 @@ var React         = require('react')
 
 React.createClass({
   render : function () {
+    var title = status['404'];
+
     return (
-      <DocumentTitle title={status['404']}>
-        <pre>{status['404']}</pre>
+      <DocumentTitle title={title}>
+        <pre>{title}</pre>
       </DocumentTitle>
     );
   }
