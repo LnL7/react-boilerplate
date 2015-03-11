@@ -6,12 +6,13 @@ var gulp    = require('gulp')
   , stringify  = require('stringify')
   , watchify   = require('watchify')
 
-  , browserSync = require('browser-sync')
-  , buffer      = require('vinyl-buffer')
-  , source      = require('vinyl-source-stream')
+  , buffer = require('vinyl-buffer')
+  , source = require('vinyl-source-stream')
 
-  , del  = require('del')
-  , path = require('path')
+  , browserSync = require('browser-sync')
+  , del         = require('del')
+  , path        = require('path')
+  , sequence    = require('run-sequence')
 
   , heimlich = require('heimlich')
   ;
@@ -23,7 +24,12 @@ gulp.task('clean', function (next) {
   del(root, next);
 });
 
-gulp.task('watch', ['clean', 'browser', 'jsx'], function () {
+gulp.task('watch', ['browser'],  function () {
+  sequence(
+    ['clean'],
+    ['jsx', 'styl']
+  );
+  gulp.watch('app/**/styles/**/*.{styl,js}', ['styl']);
 });
 
 gulp.task('browser', ['node'], function () {
@@ -49,15 +55,24 @@ gulp.task('node', function () {
   });
 });
 
-gulp.task("jsx", function () {
+gulp.task('jsx', function () {
   var entry   = './client.js'
     , scripts = 'public/assets/javascripts'
     ;
 
   heimlich.reactify([entry], { watching: true })
-    .done(function (bundler) {
-      bundler.pipe(heimlich.dest(__dirname, scripts));
+    .done(function (stream) {
+      stream.pipe(heimlich.dest(__dirname, scripts));
     });
+});
+
+gulp.task('styl', function () {
+  var styl   = 'app/**/styles/**/*.styl'
+    , css    = 'app/**/styles/**/*.css'
+    , styles = 'public/assets/stylesheets'
+
+  heimlich.stylus([styl, css])
+    .pipe(heimlich.dest(__dirname, styles));
 });
 
 gulp.task('default', ['watch']);
