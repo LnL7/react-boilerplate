@@ -60,19 +60,19 @@ gulp.task('jsx', function () {
     , scripts = 'public/assets/javascripts'
     ;
 
-  heimlich.reactify([entry], { watching: true })
+  heimlich.reactify([entry], { watching: true, debug: true })
     .done(function (stream) {
       stream.pipe(heimlich.dest(__dirname, scripts));
     });
 });
 
 gulp.task('styl', function () {
-  var styl   = 'app/**/styles/**/*.styl'
-    , css    = 'app/**/styles/**/*.css'
-    , styles = 'public/assets/stylesheets'
+  var styl   = 'app/**/styles/*.styl'
+    , css    = 'app/**/styles/*.css'
+    , styles = path.join(__dirname, 'public/assets/stylesheets')
+    ;
 
-  heimlich.stylus([styl, css])
-    .pipe(heimlich.dest(__dirname, styles));
+  heimlich.tasks.stylus({ source: [styl, css], dest: styles });
 });
 
 gulp.task('default', ['watch']);
