@@ -66,13 +66,9 @@ gulp.task('jsx', function () {
     });
 });
 
-gulp.task('styl', function () {
-  var styl   = 'app/**/styles/*.styl'
-    , css    = 'app/**/styles/*.css'
-    , styles = path.join(__dirname, 'public/assets/stylesheets')
-    ;
-
-  heimlich.tasks.stylus({ source: [styl, css], dest: styles });
-});
+gulp.task('styl', heimlich.tasks.stylus({
+    source : ['app/**/styles/*.styl', 'app/**/styles/*.css']
+  , dest   : 'public/assets/stylesheets'
+  }));
 
 gulp.task('default', ['watch']);
