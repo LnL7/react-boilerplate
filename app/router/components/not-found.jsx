@@ -4,7 +4,6 @@ var React         = require('react')
 
   , {status} = require('../metadata.json')
 
-
   , NotFound =
 
 React.createClass({

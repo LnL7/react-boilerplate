@@ -7,7 +7,6 @@ var React  = require('react')
 
   , {Route, DefaultRoute, NotFoundRoute} = Router
 
-
   , routes =
 
 [

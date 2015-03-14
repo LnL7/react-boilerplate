@@ -4,7 +4,6 @@ var React         = require('react')
   , {PropTypes}                     = React
   , {description, keywords, status} = require('../metadata.json')
 
-
   , InternalServerError =
 
 React.createClass({

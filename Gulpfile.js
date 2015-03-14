@@ -67,7 +67,7 @@ gulp.task('jsx', function () {
 });
 
 gulp.task('styl', heimlich.tasks.stylus({
-    source : ['app/**/styles/*.styl', 'app/**/styles/*.css']
+    source : ['styles/*.css', 'styles/*.styl', 'app/**/styles/*.css', 'app/**/styles/*.styl']
   , dest   : 'public/assets/stylesheets'
   }));
 

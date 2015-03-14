@@ -3,7 +3,6 @@ var React = require('react')
   , {PropTypes}                     = React
   , {assets, description, keywords} = require('../metadata.json')
 
-
   , Html =
 
 React.createClass({
