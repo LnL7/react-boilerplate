@@ -43,32 +43,28 @@ gulp.task('browser', ['node'], function () {
   });
 });
 
-gulp.task('node', function () {
-  var entry = 'index.js'
-    , app   = path.join(__dirname, 'app/server/**/*')
-    ;
-
-  nodemon({
-    script   : entry
-  , nodeArgs : ['--harmony']
-  , watch    : [entry, app]
-  });
-});
+gulp.task('node', heimlich.tasks.node({ files: ['app/server/**/*'] }));
 
 gulp.task('jsx', function () {
   var entry   = './client.js'
     , scripts = 'public/assets/javascripts'
     ;
 
-  heimlich.reactify([entry], { watching: true, debug: true })
+  heimlich.browserify({
+    entries  : [entry]
+  , watching : true
+  , debug    : true
+  })
+    .configure(heimlich.browserify.external({ libs: ['react', 'react-router', 'react-document-title'] }))
+    .configure(heimlich.browserify.react({ global: true }))
     .done(function (stream) {
       stream.pipe(heimlich.dest(__dirname, scripts));
     });
 });
 
 gulp.task('styl', heimlich.tasks.stylus({
-    source : ['styles/*.css', 'styles/*.styl', 'app/**/styles/*.css', 'app/**/styles/*.styl']
-  , dest   : 'public/assets/stylesheets'
-  }));
+  source : ['styles/*.css', 'styles/*.styl', 'app/**/styles/*.css', 'app/**/styles/*.styl']
+, dest   : 'public/assets/stylesheets'
+}));
 
 gulp.task('default', ['watch']);
