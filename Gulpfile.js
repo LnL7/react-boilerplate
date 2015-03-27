@@ -3,7 +3,6 @@ var gulp    = require('gulp')
 
   , browserify = require('browserify')
   , reactify   = require('reactify')
-  , stringify  = require('stringify')
   , watchify   = require('watchify')
 
   , buffer = require('vinyl-buffer')
