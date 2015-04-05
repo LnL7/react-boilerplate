@@ -1,9 +1,7 @@
 var React  = require('react')
   , Router = require('react-router')
 
-  , entry =
-
-(routes) =>
+var entry = (routes) =>
   document.addEventListener('DOMContentLoaded', e => {
     console.log('React loaded...');
 

@@ -6,9 +6,9 @@ var koa    = require('koa')
 
   , path  = require('path')
 
-  , errorHandler = require('app/server/error-handler')
-  , render       = require('app/server/render')
-  , routes       = require('app/router/routes')
+  , errorHandler = require('./app/server/error-handler')
+  , render       = require('./app/server/render')
+  , routes       = require('./app/router/routes')
 
   , app  = koa()
   ;

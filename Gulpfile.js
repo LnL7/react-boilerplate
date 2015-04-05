@@ -51,8 +51,8 @@ gulp.task('jsx', function () {
 
   heimlich.browserify({
     entries  : [entry]
-  , watching : true
   , debug    : true
+  , watching : true
   })
     .configure(heimlich.browserify.external({ libs: ['react', 'react-router', 'react-document-title'] }))
     .configure(heimlich.browserify.react({ global: true }))
