@@ -2,18 +2,23 @@ var React         = require('react')
   , Router        = require('react-router')
   , DocumentTitle = require('react-document-title')
 
-  , {title} = require('../metadata.json')
+  , { RouteHandler, Link } = Router
+  ;
 
-  , {RouteHandler, Link} = Router
+var App = React.createClass({
+  propTypes: {
+    title : React.PropTypes.string.isRequired
+  }
 
-  , App =
+, getDefaultProps: () => ({
+    title : require('../metadata/title')
+  })
 
-React.createClass({
-  render : function () {
+, render: function () {
     return (
-      <DocumentTitle title={title}>
+      <DocumentTitle title={this.props.title}>
         <div className="app">
-          <RouteHandler/>
+          <RouteHandler {...this.props}/>
         </div>
       </DocumentTitle>
     );

@@ -1,14 +1,13 @@
 var React         = require('react')
   , Router        = require('react-router')
   , DocumentTitle = require('react-document-title')
+  ;
 
-  , {status} = require('../metadata.json')
-
-  , NotFound =
-
-React.createClass({
-  render : function () {
-    var title = status['404'];
+var NotFound = React.createClass({
+  propTypes: {
+  }
+, render: function () {
+    var title = "404 Not Found";
 
     return (
       <DocumentTitle title={title}>

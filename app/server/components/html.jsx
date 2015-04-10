@@ -1,28 +1,24 @@
 var React = require('react')
+  ;
 
-  , {PropTypes}                     = React
-  , {assets, description, keywords} = require('../metadata.json')
-
-  , Html =
-
-React.createClass({
-  propTypes : {
-    title  : PropTypes.string.isRequired
-  , markup : PropTypes.string.isRequired
+var Html = React.createClass({
+  propTypes: {
+    title  : React.PropTypes.string.isRequired
+  , markup : React.PropTypes.string.isRequired
   }
 
-, render : function () {
+, render: function () {
     return (
       <html className="no-js" lang="en">
         <head>
           <meta charSet="utf-8"/>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
-          <meta name="description" content={description}/>
-          <meta name="keywords" content={keywords}/>
+          <meta name="description" content=""/>
+          <meta name="keywords" content=""/>
           <title>{this.props.title}</title>
-          <link rel="stylesheet" href={assets.css}/>
-          <script type="text/javascript" src={assets.js}></script>
+          <link rel="stylesheet" href="/assets/stylesheets/main.css"/>
+          <script type="text/javascript" src="/assets/javascripts/main.js"></script>
         </head>
         <body dangerouslySetInnerHTML={{ __html: this.props.markup }}></body>
       </html>

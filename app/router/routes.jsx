@@ -5,15 +5,14 @@ var React  = require('react')
   , Default  = require('./components/default')
   , NotFound = require('./components/not-found')
 
-  , {Route, DefaultRoute, NotFoundRoute} = Router
+  , { Route, DefaultRoute, NotFoundRoute } = Router
+  ;
 
-  , routes =
-
-[
+var routes = (
   <Route name="root" path="/" handler={App}>
     <DefaultRoute name="default" handler={Default}/>
+    <NotFoundRoute name="not-found" handler={NotFound}/>
   </Route>
-, <NotFoundRoute name="not-found" handler={NotFound}/>
-];
+);
 
 module.exports = routes;

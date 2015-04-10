@@ -1,13 +1,6 @@
 var gulp    = require('gulp')
   , nodemon = require('gulp-nodemon')
 
-  , browserify = require('browserify')
-  , reactify   = require('reactify')
-  , watchify   = require('watchify')
-
-  , buffer = require('vinyl-buffer')
-  , source = require('vinyl-source-stream')
-
   , browserSync = require('browser-sync')
   , del         = require('del')
   , path        = require('path')
@@ -17,6 +10,8 @@ var gulp    = require('gulp')
   ;
 
 
+process.env.NODE_PATH = path.join(__dirname, 'app');
+
 gulp.task('clean', function (next) {
   var root = path.join(__dirname, 'public/assets');
 
@@ -24,10 +19,7 @@ gulp.task('clean', function (next) {
 });
 
 gulp.task('watch', ['browser'],  function () {
-  sequence(
-    ['clean'],
-    ['jsx', 'styl']
-  );
+  sequence(['clean'], ['jsx', 'styl']);
   gulp.watch('app/**/styles/**/*.{styl,js}', ['styl']);
 });
 
@@ -42,27 +34,28 @@ gulp.task('browser', ['node'], function () {
   });
 });
 
-gulp.task('node', heimlich.tasks.node({ files: ['app/server/**/*'] }));
+gulp.task('node', heimlich.tasks.node({ files: ['index.js', 'app/server', 'app/router'] }));
 
 gulp.task('jsx', function () {
-  var entry   = './client.js'
+  var entry   = 'client.jsx'
     , scripts = 'public/assets/javascripts'
     ;
 
   heimlich.browserify({
-    entries  : [entry]
+    entries  : [path.join(__dirname, entry)]
   , debug    : true
   , watching : true
   })
-    .configure(heimlich.browserify.external({ libs: ['react', 'react-router', 'react-document-title'] }))
-    .configure(heimlich.browserify.react({ global: true }))
+    .configure(heimlich.browserify.external({ libs: ['react', 'react/addons', 'react-router', 'react-document-title'] }))
+    .configure(heimlich.browserify.react({ experimental: true }))
+    .configure(heimlich.browserify.string())
     .done(function (stream) {
       stream.pipe(heimlich.dest(__dirname, scripts));
     });
 });
 
 gulp.task('styl', heimlich.tasks.stylus({
-  source : ['styles/*.css', 'styles/*.styl', 'app/**/styles/*.css', 'app/**/styles/*.styl']
+  source : ['app/**/styles/*.css', 'app/**/styles/index.styl']
 , dest   : 'public/assets/stylesheets'
 }));
 
