@@ -34,7 +34,7 @@ gulp.task('browser', ['node'], function () {
   });
 });
 
-gulp.task('node', heimlich.tasks.node({ files: ['index.js', 'app/server', 'app/router'] }));
+gulp.task('node', heimlich.tasks.node({ files: ['app/server', 'app/router'] }));
 
 gulp.task('jsx', function () {
   var entry   = 'client.jsx'

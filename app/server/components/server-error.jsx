@@ -1,28 +1,26 @@
 var React         = require('react')
-  , Router        = require('react-router')
   , DocumentTitle = require('react-document-title')
-
-  , { RouteHandler, Link } = Router
   ;
 
-var App = React.createClass({
+var ServerError = React.createClass({
   propTypes: {
     title : React.PropTypes.string.isRequired
+  , error : React.PropTypes.any.isRequired
   }
-
 , getDefaultProps: () => ({
-    title : require('metadata/title')
+    title : require('metadata/server-error')
   })
 
 , render: function () {
     return (
       <DocumentTitle title={this.props.title}>
-        <div className="app">
-          <RouteHandler {...this.props}/>
-        </div>
+        <section>
+          <h1>{this.props.title}</h1>
+          <pre>{this.props.error.stack || this.props.error}</pre>
+        </section>
       </DocumentTitle>
     );
   }
 });
 
-module.exports = App;
+module.exports = ServerError;
