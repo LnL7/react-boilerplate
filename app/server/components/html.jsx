@@ -8,6 +8,8 @@ var Html = React.createClass({
   }
 
 , render: function () {
+    var production = process.env.NODE_ENV === 'production';
+
     return (
       <html className="no-js" lang="en">
         <head>
@@ -20,7 +22,7 @@ var Html = React.createClass({
           <link rel="stylesheet" href="/assets/stylesheets/main.css"/>
           <script type="text/javascript" src="/assets/javascripts/main.js"></script>
         </head>
-        <body dangerouslySetInnerHTML={{ __html: this.props.markup }}></body>
+        <body dangerouslySetInnerHTML={{ __html: production ? this.props.markup : '' }}></body>
       </html>
     );
   }
