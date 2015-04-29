@@ -46,9 +46,9 @@ gulp.task('jsx', function () {
   , debug    : true
   , watching : true
   })
-    .configure(heimlich.browserify.external({ libs: ['react', 'react/addons', 'react-router', 'react-document-title'] }))
-    .configure(heimlich.browserify.react({ experimental: true }))
     .configure(heimlich.browserify.string())
+    .configure(heimlich.browserify.external({ libs: ['react', 'react/addons', 'react-router', 'react-document-title'] }))
+    .configure(heimlich.browserify.react())
     .done(function (stream) {
       stream.pipe(heimlich.dest(__dirname, scripts));
     });
