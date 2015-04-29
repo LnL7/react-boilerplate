@@ -1,4 +1,4 @@
-require('babel/register');
+require('babel/register')({ experimental: true });
 require('heimlich/string/register');
 
 var koa    = require('koa')
