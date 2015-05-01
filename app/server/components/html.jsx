@@ -2,12 +2,12 @@ var React = require('react')
   ;
 
 var Html = React.createClass({
-  propTypes: {
+  propTypes : {
     title  : React.PropTypes.string.isRequired
   , markup : React.PropTypes.string.isRequired
   }
-
-, render: function () {
+,
+  render: function () {
     var production = process.env.NODE_ENV === 'production';
 
     return (

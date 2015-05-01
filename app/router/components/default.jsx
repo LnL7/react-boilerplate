@@ -5,10 +5,11 @@ var React  = require('react')
   ;
 
 var Default = React.createClass({
-  propTypes: {
+  propTypes : {
     title : React.PropTypes.string.isRequired
   }
-, render: function () {
+,
+  render : function () {
     return (
       <div className="default">
         <h1>{this.props.title}</h1>

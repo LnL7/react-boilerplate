@@ -3,15 +3,16 @@ var React         = require('react')
   ;
 
 var ServerError = React.createClass({
-  propTypes: {
+  propTypes : {
     title : React.PropTypes.string.isRequired
   , error : React.PropTypes.any.isRequired
   }
-, getDefaultProps: () => ({
+,
+  getDefaultProps : () => ({
     title : require('metadata/server-error')
   })
-
-, render: function () {
+,
+  render : function () {
     return (
       <DocumentTitle title={this.props.title}>
         <section>

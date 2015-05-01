@@ -4,9 +4,10 @@ var React         = require('react')
   ;
 
 var NotFound = React.createClass({
-  propTypes: {
+  propTypes : {
   }
-, render: function () {
+,
+  render : function () {
     var title = "404 Not Found";
 
     return (

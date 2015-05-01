@@ -6,15 +6,15 @@ var React         = require('react')
   ;
 
 var App = React.createClass({
-  propTypes: {
+  propTypes : {
     title : React.PropTypes.string.isRequired
   }
-
-, getDefaultProps: () => ({
+,
+  getDefaultProps : () => ({
     title : require('metadata/title')
   })
-
-, render: function () {
+,
+  render : function () {
     return (
       <DocumentTitle title={this.props.title}>
         <div className="app">
