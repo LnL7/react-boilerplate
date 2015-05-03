@@ -41,9 +41,11 @@ gulp.task('jsx', function () {
     , scripts = 'public/assets/javascripts'
     ;
 
+  var production = process.env.NODE_ENV === 'production';
+
   heimlich.browserify({
     entries  : [path.join(__dirname, entry)]
-  , debug    : true
+  , debug    : !production
   , watching : true
   })
     .configure(heimlich.browserify.string())
